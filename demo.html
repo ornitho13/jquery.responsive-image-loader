@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>demo jResponsiveImageLoader</title>
+<!-- <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" media="screen"/> -->
+        
+<style type="text/css">
+
+</style>
+        
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="jquery.responsive-image-loader.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('.lazy').jResponsiveImageLoader({
+	});
+	$('.lazy-bandwidth').jResponsiveImageLoader({
+	    event : 'load',
+	    detection : 'bandwidth',
+	    file : {
+	        src : 'test.png',
+	        weight : 91
+	    },
+	    map : [128, 512, 1024, 4096]
+	    
+	});
+	$('.lazy-resolution').jResponsiveImageLoader({
+	    event : 'load',
+	    detection : 'resolution',
+	    map : [320, 480, 800, 1024]
+	});
+	$('.lazy-no-resize').jResponsiveImageLoader({
+	    event : 'load',
+	    detection : 'resolution',
+	    map : [320, 480, 800, 1024],
+	    resize : false
+	});
+});
+</script>
+</head>
+<body>
+<h1>Demo jResponsiveImageLoader</h1>
+<h2>sans arguments (resolution par defaut avec resize)</h2>
+<img class="lazy" src="data:image/gif;base64,R0lGODlhAQABAID/AMDAwAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" 
+    data-original="logo.jpg" 
+    data-w320="logo-w320.jpg" 
+    data-w480="logo-w480.jpg" 
+    data-w800="logo-w800.jpg" 
+alt="..."/>
+<br /><br />
+<h2>detection par resolution avec resize</h2>
+<img class="lazy-resolution" src="data:image/gif;base64,R0lGODlhAQABAID/AMDAwAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" 
+    data-original="logo.jpg" 
+    data-w320="logo-w320.jpg" 
+    data-w480="logo-w480.jpg" 
+    data-w800="logo-w800.jpg" 
+    data-w1024="logo-w1024.jpg" 
+alt="..."/>
+<br /><br />
+<h2>detection par bandwidth avec resize</h2>
+<img class="lazy-bandwidth" src="data:image/gif;base64,R0lGODlhAQABAID/AMDAwAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" 
+    data-original="logo.jpg" 
+    data-b128="logo-b128.jpg" 
+    data-b512="logo-b512.jpg" 
+    data-b1024="logo-b1024.jpg" 
+    data-b4096="logo-b4096.jpg" 
+    width="100%"
+alt="..."/>
+<br /><br />
+<h2>detection par resolution sans resize</h2>
+<img class="lazy-no-resize" src="data:image/gif;base64,R0lGODlhAQABAID/AMDAwAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" 
+    data-original="logo.jpg" 
+    data-w320="logo-w320.jpg" 
+    data-w480="logo-w480.jpg" 
+    data-w800="logo-w800.jpg" 
+    data-w1024="logo-w1024.jpg" 
+alt="..."/>
+<br /><br /><br /><br /><br /><br />
+<div>
+Images by Pierre Dalous (Own work) [<a href="http://creativecommons.org/licenses/by-sa/3.0">CC-BY-SA-3.0</a>], <a href="http://commons.wikimedia.org/wiki/File%3ANiverolle_Montagne_noire_Francer.jpg">via Wikimedia Commons</a>
+</div>
+</body>
+</html>
