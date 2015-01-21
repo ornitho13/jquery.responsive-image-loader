@@ -39,7 +39,7 @@
 				
 				return size;
 			}
-			function getBandWidth(file, map){
+			function getBandWidth(file, map, callback){
 				var img = new Image(),timeStart = 0, i = 0, len = map.length, size = '0', 
 				timeEnd = 0, totalTime = 0, speed = 0;
 				img.src = file.src + '?_' + new Date().getTime();
@@ -62,6 +62,7 @@
 						size = 'original';
 					}
 					sizeTest = size;
+                    callback();
 					return size;
 				};
 			}
@@ -75,7 +76,7 @@
 				}
 				htmlBodyTop = $(document).scrollTop() + screenHeight;
 				if (imgPosition.top <= htmlBodyTop) {
-					//on charge la page 
+					//on charge l'image 
 					img.attr('src', originalSrc).animate({
 						opacity : 1
 					}, 'slow');
@@ -99,20 +100,12 @@
 			function triggerAction(params) {
 				var screenSize = '0', timerUidInterval = null;
 				if (params.detection === 'bandwidth') {
-					getBandWidth(params.file, params.map);
-					if (timerUidInterval === null) {
-						clearInterval(timerUidInterval);
-					}
-					timerUidInterval = setInterval(function(){
-						if (sizeTest !== null) {
-							clearInterval(timerUidInterval);
-							screenSize = sizeTest;
-							$this.each(function(){
-								processResolution($(this), screenSize);
-							});
-						}
-					}, 10);
-					
+					getBandWidth(params.file, params.map, function(){
+                        screenSize = sizeTest;
+                        $this.each(function(){
+                            processResolution($(this), screenSize);
+                        });
+                    });					
 				} else {
 					screenSize = getSize(params.map);
 					return $this.each(function(){
@@ -124,15 +117,5 @@
 			$(window).on(params.event, function(){
 				triggerAction(params);
 			});
-			if (params.resize !== false) {
-				$(window).on('resize', function(){
-					if (timerUid !== null) {
-						clearTimeout(timerUid);
-					}
-					timerUid = setTimeout(function(){
-						triggerAction(params);
-					}, 100);
-				});
-			}
 		};
 })();
