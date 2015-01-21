@@ -62,7 +62,7 @@
 						size = 'original';
 					}
 					sizeTest = size;
-                    callback();
+					callback();
 					return size;
 				};
 			}
@@ -101,11 +101,11 @@
 				var screenSize = '0', timerUidInterval = null;
 				if (params.detection === 'bandwidth') {
 					getBandWidth(params.file, params.map, function(){
-                        screenSize = sizeTest;
-                        $this.each(function(){
-                            processResolution($(this), screenSize);
-                        });
-                    });					
+						screenSize = sizeTest;
+						$this.each(function(){
+							processResolution($(this), screenSize);
+						});
+					});					
 				} else {
 					screenSize = getSize(params.map);
 					return $this.each(function(){
